@@ -9,18 +9,16 @@
     <!-- Fonts Section -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="./output.css"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Bebas+Neue&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style type="text/tailwindcss">
         @layer utilities {
-                html {
-                scroll-behavior:smooth;
-                }
-    
-                .dropdown-content {
+            html {
+                scroll-behavior: smooth;
+            }
+            .dropdown-content {
                 display: none;
                 position: absolute;
                 background-color: rgb(46, 46, 46,0.5);
@@ -37,7 +35,6 @@
             .dropdown-content a:hover {
                 background-color: #555555;
                 color: aqua;
-    
             }
             .dropdown:hover .dropdown-content {
                 display: block;
@@ -54,7 +51,7 @@
     </style>
     <script src="https://kit.fontawesome.com/6d2c452e18.js" crossorigin="anonymous"></script>
 </head>
-<body class="m-0 p-0 box-border bg-slate-100" style="font-family: Poppins,sans-serif;">
+<body class="m-0 p-0 box-border bg-slate-100" style="font-family: Poppins, sans-serif;">
     <nav id="navbar" class="z-50 min-h-[47px] py-3 w-full bg-[rgb(0,0,0,0.9)] px-[150px] flex justify-between gap-3 backdrop-blur-sm">
         <div class="text-[28px] font-bold italic text-[#EA906C] flex justify-center items-center gap-[15px]">
             <img src="{% static 'assets/barbell-logo.png' %}" alt="" class="w-[45px]">
@@ -87,7 +84,7 @@
     </nav>
     <div class="flex justify-center items-center mt-[70px]">
         <div class="w-[700px] ">
-        <h1 class="text-[35px] font-bold mb-4 text-center tracking-wider" style="font-family:Bebas Neue, sans-serif;">WORKOUT &nbsp;DASHBOARD<i class="fa-solid fa-dumbbell ml-[10px]"></i></p></h1>
+        <h1 class="text-[35px] font-bold mb-4 text-center tracking-wider" style="font-family:Bebas Neue, sans-serif;">WORKOUT &nbsp;DASHBOARD<i class="fa-solid fa-dumbbell ml-[10px]"></i></h1>
         <table class="w-full bg-white border-2 border-slate-300 text-center ">
             <thead class="bg-slate-200 border-2 border-slate-300">
                 <tr>
@@ -99,7 +96,9 @@
                 {% for session in workout_sessions %}
                 <tr>
                     <td class="px-4 py-2 border">{{ forloop.counter }}</td>
-                    <td class="px-4 py-2 border">{{ session.date }}</td>
+                    <td class="px-4 py-2 border">
+                        <a href="{% url 'download' session.id %}" class="text-blue-500 hover:underline">{{ session.date }}</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

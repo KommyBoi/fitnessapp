@@ -103,6 +103,7 @@ def handle_url_view(request):
 
     # Handle GET requests or other cases where POST data is not processed
     return HttpResponse("Method not allowed or invalid request.")
+
 def download_view(request, workout_session_id):
     profile_pic_url = None
     if request.user.is_authenticated:
@@ -124,5 +125,20 @@ def download_view(request, workout_session_id):
     return render(request, 'downloadpage.html', context)
 
 def dashboard(request):
+    profile_pic_url = None
+    
+    # Fetch the Google profile picture URL if the user is authenticated
+    if request.user.is_authenticated:
+        try:
+            social_account = SocialAccount.objects.get(user=request.user, provider='google')
+            profile_pic_url = social_account.extra_data.get('picture')
+        except SocialAccount.DoesNotExist:
+            profile_pic_url = None
+
     workout_sessions = WorkoutSession.objects.filter(user=request.user).order_by('date')
-    return render(request, 'dashboard.html', {'workout_sessions': workout_sessions})
+    # Pass the URL to the template context
+    context = {
+        'profile_pic_url': profile_pic_url,
+        'workout_sessions': workout_sessions
+    }
+    return render(request, 'dashboard.html', context)
